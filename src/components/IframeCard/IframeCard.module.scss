@@ -1,0 +1,286 @@
+// ─── Card wrapper — used only for the entry animation ────────────────────────
+.cardWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Card ────────────────────────────────────────────────────────────────────
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+
+  &:hover {
+    border-color: var(--border-hover);
+
+    .glow {
+      opacity: 1;
+    }
+  }
+}
+
+// ─── Browser chrome ──────────────────────────────────────────────────────────
+.browser {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.browserBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+
+  span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+}
+
+.urlBar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 4px 10px;
+  overflow: hidden;
+}
+
+.urlIcon {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.urlText {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.viewport {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+  overflow: hidden;
+  background: #fff;
+}
+
+// ─── Skeleton ────────────────────────────────────────────────────────────────
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  z-index: 1;
+}
+
+.skeletonBar {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonBlock {
+  flex: 1;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s infinite 0.3s;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+.iframe {
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: top left;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+
+  &.loaded {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// ─── Info footer ─────────────────────────────────────────────────────────────
+// min-height keeps cards aligned; content can grow if needed
+
+.info {
+  display: flex;
+  flex-direction: column;
+  min-height: 130px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  padding: 14px 18px 14px;
+  gap: 8px;
+}
+
+// Top row: number + text block + stack tags
+.infoTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 1;
+}
+
+.infoLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.index {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 10px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// AI note — visible, wraps naturally, not clipped
+.aiNote {
+  font-size: 9px;
+  color: var(--text-secondary);  // brighter than text-muted
+  line-height: 1.4;
+  font-style: italic;
+  opacity: 0.85;
+  // No nowrap/ellipsis — let it wrap to 2 lines
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.infoRight {
+  flex-shrink: 0;
+}
+
+// ul reset
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(201, 163, 87, 0.3);
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+// Bottom row: open button always pinned to bottom-right
+.infoBottom {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.openBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+// ─── Glow ────────────────────────────────────────────────────────────────────
+.glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(201, 163, 87, 0.06),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}

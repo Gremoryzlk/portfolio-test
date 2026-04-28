@@ -1,0 +1,130 @@
+.footer {
+  border-top: 1px solid var(--border);
+}
+
+.contactSection {
+  padding: 120px 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(201, 163, 87, 0.03)
+  );
+
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
+}
+
+.contactInner {
+  max-width: 700px;
+}
+
+.contactTitle {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 56px;
+
+  em {
+    font-style: italic;
+    color: var(--accent);
+  }
+}
+
+.contactLinks {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.emailArrow {
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+
+  .email:hover & {
+    transform: translate(2px, -2px);
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(201, 163, 87, 0.35);
+  padding: 8px 18px;
+  border-radius: 2px;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+}
+
+// ─── Bottom bar ──────────────────────────────────────────────────────────────
+
+.bar {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+}
+
+.barInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.barLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.logoMark {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.barRight {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}

@@ -1,0 +1,223 @@
+// ─── Section ─────────────────────────────────────────────────────────────────
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+
+  @media (max-width: 1024px) { padding: 60px 0; }
+  @media (max-width: 768px)  { padding: 44px 0; }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent
+    );
+  }
+}
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 32px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.counter {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrowBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);   // brighter border
+  border-radius: 50%;
+  color: var(--text-primary);                    // bright white instead of text-secondary
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(201, 163, 87, 0.08);
+  }
+}
+
+// ─── Clip zone — edge-to-edge, no padding ────────────────────────────────────
+// IMPORTANT: padding on this element would let adjacent slides peek through.
+// overflow:hidden clips at the border box — padding is inside the clip area.
+// Solution: zero padding here, add inner centering wrapper instead.
+
+.clipZone {
+  overflow: hidden;
+  position: relative;
+}
+
+.sliderInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 768px) { padding: 0 16px; }
+}
+
+.track {
+  display: flex;
+  user-select: none;
+  will-change: transform;
+}
+
+.slide {
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+// ─── Card ────────────────────────────────────────────────────────────────────
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-card);
+  transition: border-color 0.4s ease, transform 0.4s var(--ease-out), box-shadow 0.4s ease;
+  opacity: 0.45;
+  transform: scale(0.96);
+
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+    border-color: var(--border-hover);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+// ─── Image — portrait-safe ───────────────────────────────────────────────────
+
+.imageWrap {
+  position: relative;
+  height: 420px;
+  background: #0a0a0a;
+  display: block;
+  overflow: hidden;
+
+  @media (max-width: 768px) { height: 300px; }
+
+  &:hover .overlay { opacity: 1; }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  user-select: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+.overlayIcon   { font-size: 28px; color: var(--accent); line-height: 1; }
+.overlayTitle  { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--text-primary); }
+.overlayCategory { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+
+// ─── Dots — larger tap area on mobile ────────────────────────────────────────
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 8px 0;             // extra tap area
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.3s ease;
+  // Bigger invisible tap target for mobile
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+  }
+
+  &.dotActive {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 3px;
+  }
+}
+
+// ─── Progress bar ────────────────────────────────────────────────────────────
+
+.progressBar {
+  height: 1px;
+  background: var(--border);
+  margin-top: 28px;
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  background: linear-gradient(to right, var(--accent), var(--accent-light));
+  border-radius: 1px;
+}

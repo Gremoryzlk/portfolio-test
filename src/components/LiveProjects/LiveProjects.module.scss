@@ -1,0 +1,70 @@
+.section {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent
+    );
+  }
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 48px;
+  margin-bottom: 64px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+}
+
+.desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 280px;
+  text-align: right;
+  padding-bottom: 8px;
+
+  @media (max-width: 900px) {
+    text-align: left;
+    max-width: 100%;
+  }
+}
+
+.notice {
+  margin-top: 28px;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  border-left: 2px solid rgba(201, 163, 87, 0.3);
+  padding-left: 14px;
+}
+
+.grid {
+  display: grid;
+  // auto-fill: naturally goes 3 → 2 → 1 columns as width shrinks
+  // min(340px, 100%) ensures single column on very small screens
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  gap: 24px;
+  align-items: stretch;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
+}
